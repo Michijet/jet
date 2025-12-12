@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>日本全国の花火大会</title>
+  <title>日本各地の星空</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500&family=Playfair+Display:wght@600&display=swap');
 
@@ -150,36 +150,36 @@
     <span></span><span></span><span></span><span></span>
   </div>
   <section class="panel">
-    <div class="badge">Fireworks Season</div>
-    <h1>日本全国の花火大会</h1>
+    <div class="badge">Starry Nights</div>
+    <h1>日本各地の星空</h1>
     <p class="location" id="location"></p>
-    <p>全国各地の花火大会の映像が背景で巡回します。光の余韻を感じるグラスカード越しにお楽しみください。</p>
+    <p>全国の星空映像が背景で巡回します。静かな夜空の瞬きを、柔らかなガラス越しにお楽しみください。</p>
   </section>
   <script>
-    const shows = [
+    const skies = [
       {
-        place: '北海道・洞爺湖ロングラン花火',
-        url: 'https://videos.pexels.com/video-files/1501154/1501154-hd_1280_720_24fps.mp4'
+        place: '北海道・知床の星空',
+        url: 'https://videos.pexels.com/video-files/754985/754985-hd_1920_1080_25fps.mp4'
       },
       {
-        place: '秋田・大曲の花火',
-        url: 'https://videos.pexels.com/video-files/1409899/1409899-hd_1280_720_25fps.mp4'
+        place: '青森・八甲田の星空',
+        url: 'https://videos.pexels.com/video-files/1093661/1093661-hd_1920_1080_25fps.mp4'
       },
       {
-        place: '東京・隅田川花火大会',
-        url: 'https://videos.pexels.com/video-files/2529861/2529861-hd_1920_1080_25fps.mp4'
+        place: '山梨・富士河口湖の星空',
+        url: 'https://videos.pexels.com/video-files/856772/856772-hd_1920_1080_24fps.mp4'
       },
       {
-        place: '神奈川・江の島花火',
-        url: 'https://videos.pexels.com/video-files/854429/854429-hd_1920_1080_25fps.mp4'
+        place: '長野・阿智村の星空',
+        url: 'https://videos.pexels.com/video-files/855293/855293-hd_1920_1080_25fps.mp4'
       },
       {
-        place: '京都・保津川花火',
-        url: 'https://videos.pexels.com/video-files/10613968/10613968-hd_1280_720_24fps.mp4'
+        place: '沖縄・石垣島の星空',
+        url: 'https://videos.pexels.com/video-files/2029295/2029295-hd_1920_1080_24fps.mp4'
       },
       {
-        place: '長崎・長崎みなとまつり',
-        url: 'https://videos.pexels.com/video-files/854180/854180-hd_1920_1080_25fps.mp4'
+        place: '北海道・美瑛の星空',
+        url: 'https://videos.pexels.com/video-files/854427/854427-hd_1920_1080_25fps.mp4'
       }
     ];
 
@@ -188,27 +188,27 @@
     const loc = document.getElementById('location');
     let index = 0;
 
-    const applyShow = (show, instant = false) => {
-      loc.textContent = show.place;
+    const applySky = (sky, instant = false) => {
+      loc.textContent = sky.place;
       if (instant) {
-        video.src = show.url;
+        video.src = sky.url;
         video.play().catch(() => {});
         return;
       }
       bg.classList.add('fade');
       setTimeout(() => {
-        video.src = show.url;
+        video.src = sky.url;
         video.load();
         video.play().catch(() => {});
         bg.classList.remove('fade');
       }, 400);
     };
 
-    applyShow(shows[index], true);
+    applySky(skies[index], true);
 
     setInterval(() => {
-      index = (index + 1) % shows.length;
-      applyShow(shows[index]);
+      index = (index + 1) % skies.length;
+      applySky(skies[index]);
     }, 12000);
   </script>
 </body>
