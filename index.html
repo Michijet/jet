@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>隅田川花火大会</title>
+  <title>花のシンフォニー</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500&family=Playfair+Display:wght@600&display=swap');
 
@@ -150,10 +150,10 @@
     <span></span><span></span><span></span><span></span>
   </div>
   <section class="panel">
-    <div class="badge">Fireworks on Sumida</div>
-    <h1>隅田川花火大会</h1>
+    <div class="badge">Flowerscape</div>
+    <h1>花のシンフォニー</h1>
     <p class="location" id="location"></p>
-    <p>隅田川の花火映像を背景で再生します。音が含まれるため、初回は「音をオンにする」を押してお楽しみください。</p>
+    <p>いろいろな花が映し出される映像を背景に流します。音が含まれる場合は、初回に「音をオンにする」を押してお楽しみください。</p>
     <button id="sound" style="margin-top:1rem;padding:0.55rem 1.2rem;border-radius:12px;border:1px solid rgba(255,255,255,0.6);background:rgba(255,255,255,0.7);color:#3c0f24;font-weight:600;cursor:pointer;">音をオンにする</button>
   </section>
   <script>
@@ -161,13 +161,13 @@
     const video = bg.querySelector('video');
     const loc = document.getElementById('location');
 
-    const sumida = {
-      place: '東京・隅田川花火大会',
-      url: 'https://videos.pexels.com/video-files/2529861/2529861-hd_1920_1080_25fps.mp4'
+    const flowers = {
+      place: '色とりどりの花々',
+      url: 'https://videos.pexels.com/video-files/856244/856244-hd_1920_1080_24fps.mp4'
     };
 
-    loc.textContent = sumida.place;
-    video.src = sumida.url;
+    loc.textContent = flowers.place;
+    video.src = flowers.url;
     video.loop = true;
     video.playsInline = true;
     video.muted = true;
