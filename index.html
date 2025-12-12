@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>日本全国の桜の名所</title>
+  <title>日本全国の花火大会</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500&family=Playfair+Display:wght@600&display=swap');
 
@@ -11,7 +11,6 @@
       --glass: rgba(255, 255, 255, 0.26);
       --frame: rgba(255, 255, 255, 0.35);
       --text: #2d0b1e;
-      --photo: url('https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=2000&q=80');
     }
 
     * {
@@ -37,7 +36,7 @@
     .bg {
       position: fixed;
       inset: 0;
-      background: var(--photo) center/cover fixed;
+      overflow: hidden;
       transform: scale(1.02);
       transition: opacity 1.4s ease;
       z-index: -1;
@@ -45,6 +44,13 @@
 
     .bg.fade {
       opacity: 0;
+    }
+
+    .bg video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: saturate(1.06) brightness(1.02);
     }
 
     .veil {
@@ -135,68 +141,74 @@
   </style>
 </head>
 <body>
-  <div class="bg" aria-hidden="true"></div>
+  <div class="bg" aria-hidden="true">
+    <video id="bgVideo" autoplay muted loop playsinline></video>
+  </div>
   <div class="veil" aria-hidden="true"></div>
   <div class="sparkles" aria-hidden="true">
     <span></span><span></span><span></span><span></span>
     <span></span><span></span><span></span><span></span>
   </div>
   <section class="panel">
-    <div class="badge">Sakura Season</div>
-    <h1>日本全国の桜の名所</h1>
+    <div class="badge">Fireworks Season</div>
+    <h1>日本全国の花火大会</h1>
     <p class="location" id="location"></p>
-    <p>背景に満開の桜を敷き詰めました。淡い光のベールで、写真の華やかさをそのまま楽しめます。</p>
+    <p>全国各地の花火大会の映像が背景で巡回します。光の余韻を感じるグラスカード越しにお楽しみください。</p>
   </section>
   <script>
-    const spots = [
+    const shows = [
       {
-        place: '北海道・松前公園',
-        url: 'https://images.unsplash.com/photo-1458642849426-cfb724f15ef7?auto=format&fit=crop&w=2000&q=80'
+        place: '北海道・洞爺湖ロングラン花火',
+        url: 'https://videos.pexels.com/video-files/1501154/1501154-hd_1280_720_24fps.mp4'
       },
       {
-        place: '宮城・一目千本桜（大河原）',
-        url: 'https://images.unsplash.com/photo-1496065187959-7f07b8353c55?auto=format&fit=crop&w=2000&q=80'
+        place: '秋田・大曲の花火',
+        url: 'https://videos.pexels.com/video-files/1409899/1409899-hd_1280_720_25fps.mp4'
       },
       {
-        place: '東京・千鳥ヶ淵',
-        url: 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=2000&q=80'
+        place: '東京・隅田川花火大会',
+        url: 'https://videos.pexels.com/video-files/2529861/2529861-hd_1920_1080_25fps.mp4'
       },
       {
-        place: '東京・目黒川',
-        url: 'https://images.unsplash.com/photo-1489515217757-5fd1be406fef?auto=format&fit=crop&w=2000&q=80'
+        place: '神奈川・江の島花火',
+        url: 'https://videos.pexels.com/video-files/854429/854429-hd_1920_1080_25fps.mp4'
       },
       {
-        place: '京都・哲学の道',
-        url: 'https://images.unsplash.com/photo-1491955478222-69ae25414368?auto=format&fit=crop&w=2000&q=80'
+        place: '京都・保津川花火',
+        url: 'https://videos.pexels.com/video-files/10613968/10613968-hd_1280_720_24fps.mp4'
       },
       {
-        place: '山梨・河口湖',
-        url: 'https://images.unsplash.com/photo-1495435229349-e86db7bfa013?auto=format&fit=crop&w=2000&q=80'
+        place: '長崎・長崎みなとまつり',
+        url: 'https://videos.pexels.com/video-files/854180/854180-hd_1920_1080_25fps.mp4'
       }
     ];
 
     const bg = document.querySelector('.bg');
+    const video = bg.querySelector('video');
     const loc = document.getElementById('location');
     let index = 0;
 
-    const applySpot = (spot, instant = false) => {
-      loc.textContent = spot.place;
+    const applyShow = (show, instant = false) => {
+      loc.textContent = show.place;
       if (instant) {
-        bg.style.backgroundImage = `url('${spot.url}')`;
+        video.src = show.url;
+        video.play().catch(() => {});
         return;
       }
       bg.classList.add('fade');
       setTimeout(() => {
-        bg.style.backgroundImage = `url('${spot.url}')`;
+        video.src = show.url;
+        video.load();
+        video.play().catch(() => {});
         bg.classList.remove('fade');
       }, 400);
     };
 
-    applySpot(spots[index], true);
+    applyShow(shows[index], true);
 
     setInterval(() => {
-      index = (index + 1) % spots.length;
-      applySpot(spots[index]);
+      index = (index + 1) % shows.length;
+      applyShow(shows[index]);
     }, 12000);
   </script>
 </body>
